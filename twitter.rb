@@ -62,7 +62,7 @@ def google_locater(location)
   if parsed_response["results"].empty?
     return nil
   else
-    final_address = parsed_response["results"][0]["formatted_address"]
+    final_address = "#{(parsed_response["results"][0]["geometry"]["location"]["lat"]).round(2)},#{(parsed_response["results"][0]["geometry"]["location"]["lng"]).round(2)}"
     @markers.push(final_address)
     return final_address
   end
@@ -95,7 +95,8 @@ t = @new_markers.join('')
 m = "http://maps.googleapis.com/maps/api/staticmap?center=Austin,TX&zoom=1&size=640x600&markers=size:mid%7Ccolor:red#{t}&maptype=satellite&sensor=false"
 
 # This opens the google map in an html file to be viewed in browser
-File.open("googlemaps.html", 'a+') do |f|
+File.open("googlemaps.html", 'w') do |f|
+  f.write("<head><link rel='stylesheet' href='style.css' type='text/css'><head>")
   f.write("<body><div class='wrapper'><h3>Here is a map of your tweeters and followers:</h3>") 
   f.write("<h3>Search Term: ##{@search_term}</h3>")
   f.write("<h3>Search Handle: @#{@search_handle}</h3>")
@@ -104,6 +105,5 @@ File.open("googlemaps.html", 'a+') do |f|
   f.write("<img src='#{m}' >")
   f.write("</div></div></body>")
 end
-
 
 
