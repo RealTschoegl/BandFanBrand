@@ -92,15 +92,17 @@ end
 t = @new_markers.join('')
 
 # The combined new URL
-m = "http://maps.googleapis.com/maps/api/staticmap?center=Austin,TX&zoom=1&size=640x600&markers=size:mid%7Ccolor:red#{t}&sensor=false"
+m = "http://maps.googleapis.com/maps/api/staticmap?center=Austin,TX&zoom=1&size=640x600&markers=size:mid%7Ccolor:red#{t}&maptype=satellite&sensor=false"
 
 # This opens the google map in an html file to be viewed in browser
 File.open("googlemaps.html", 'a+') do |f|
-  f.write("<h3>Here is a map of your tweeters and followers:</h3>") 
-  f.write("<h3>Search Term: #{@search_term}</h3>")
-  f.write("<h3>Search Handle: #{@search_handle}</h3>")
+  f.write("<body><div class='wrapper'><h3>Here is a map of your tweeters and followers:</h3>") 
+  f.write("<h3>Search Term: ##{@search_term}</h3>")
+  f.write("<h3>Search Handle: @#{@search_handle}</h3>")
   f.write("<br />")
+  f.write("<div id='container'>")
   f.write("<img src='#{m}' >")
+  f.write("</div></div></body>")
 end
 
 
