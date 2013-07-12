@@ -3,6 +3,7 @@ require 'json'
 require 'open-uri'
 require 'pry'
 require 'uri'
+require 'sinatra'
 
 Twitter.configure do |config|
 	config.consumer_key = "WGKsIyF1bIgyMzyOyfPlUw"
@@ -24,23 +25,19 @@ tweeter_array_1 = []
 @new_markers = []
 
 #User Input Dialogue
-puts "What band or album do you want to look for?"
-search_term_1 = gets.chomp!
+search_term_1 = @twitteryTerm
 if search_term_1[0] == "#"
   @search_term = search_term_1[1..-1]
 else 
   @search_term = search_term_1
 end
-puts "Cool.  Wait a second for the results."
 
-puts "What is the Twitter handle of the band?"
-search_handle_1 = gets.chomp!
+search_handle_1 = @twitteryHandle
 if search_handle_1[0] == "@"
   @search_handle = search_handle_1[1..-1]
 else
   @search_handle = search_handle_1
 end
-puts "Cool.  Wait a second for the results."
 
 # Use search to find handles
 Twitter.search("#{@search_term}", :lang => "en", :count => 20).results.each do |tweet|
@@ -96,7 +93,7 @@ m = "http://maps.googleapis.com/maps/api/staticmap?center=Austin,TX&zoom=1&size=
 
 # This opens the google map in an html file to be viewed in browser
 File.open("googlemaps.html", 'w') do |f|
-  f.write("<head><link rel='stylesheet' href='style.css' type='text/css'><head>")
+  f.write("<head><link rel='stylesheet' href='style.css' type='text/css'></head>")
   f.write("<body><div class='wrapper'><h3>Here is a map of your tweeters and followers:</h3>") 
   f.write("<h3>Search Term: ##{@search_term}</h3>")
   f.write("<h3>Search Handle: @#{@search_handle}</h3>")
