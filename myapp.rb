@@ -20,11 +20,6 @@ get '/map/' do
     config.oauth_token_secret = ENV['TWITTER_OAUTH_TOKEN_SECRET']
   end
 
-    puts ENV['TWITTER_CONSUMER_KEY']
-    puts ENV['TWITTER_CONSUMER_SECRET']
-    puts ENV['TWITTER_OAUTH_TOKEN']
-    puts ENV['TWITTER_OAUTH_TOKEN_SECRET']
-
   # Array for Handles 
   tweeter_array_1 = []
 
