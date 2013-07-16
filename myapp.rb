@@ -5,6 +5,7 @@ require 'json'
 require 'open-uri'
 require 'pry'
 require 'uri'
+require 'shotgun'
 
 get '/' do
   erb :index
@@ -13,11 +14,16 @@ end
 get '/map/' do
 
   Twitter.configure do |config|
-    config.consumer_key = "WGKsIyF1bIgyMzyOyfPlUw"
-    config.consumer_secret = "opQAAE16rGBMhSN9RhHR2w3rbnLPku4G83kaKChyyI"
-    config.oauth_token = "499825106-3OUNfxYMxxhXXlfVq4Nqx5aeSjwwhainYIbDkR5i"
-    config.oauth_token_secret = "jlDv0dzbckoV1YT8LpqlvjAqozU6lFmXYKLOYDW8"
+    config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
+    config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
+    config.oauth_token = ENV['TWITTER_OAUTH_TOKEN']
+    config.oauth_token_secret = ENV['TWITTER_OAUTH_TOKEN_SECRET']
   end
+
+    puts ENV['TWITTER_CONSUMER_KEY']
+    puts ENV['TWITTER_CONSUMER_SECRET']
+    puts ENV['TWITTER_OAUTH_TOKEN']
+    puts ENV['TWITTER_OAUTH_TOKEN_SECRET']
 
   # Array for Handles 
   tweeter_array_1 = []
